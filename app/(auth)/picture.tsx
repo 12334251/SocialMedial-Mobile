@@ -104,6 +104,7 @@ const PictureScreen: React.FC = () => {
               : ""
           }
           placeholder="Tap to select image"
+          placeholderTextColor="#ccc"
           onTouchStart={() => {
             Keyboard.dismiss();
             handlePickImage();

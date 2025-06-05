@@ -109,6 +109,7 @@ export default function NameScreen() {
               label="First Name"
               value={firstName}
               onChangeText={setFirstName}
+              placeholderTextColor="#ccc"
               mode="outlined"
               keyboardType="default"
               theme={{ colors: { background: "white" } }}
@@ -121,6 +122,7 @@ export default function NameScreen() {
               label="Last Name"
               value={lastName}
               onChangeText={setLastName}
+              placeholderTextColor="#ccc"
               mode="outlined"
               keyboardType="default"
               theme={{ colors: { background: "white" } }}

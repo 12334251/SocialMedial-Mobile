@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "SocialMedia",
+    "name": "Social Media",
     "slug": "SocialMediaMobile",
     "owner": "mukshgupta082000",
     "version": "1.0.0",
@@ -9,6 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      "CFBundleDisplayName": "Social Media",
       "supportsTablet": true,
       "bundleIdentifier": "com.mukshgupta082000.SocialMediaMobile",
       "infoPlist": {

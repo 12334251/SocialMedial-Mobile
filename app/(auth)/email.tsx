@@ -56,6 +56,7 @@ export default function EmailScreen() {
                 }
               }}
               error={emailError}
+              placeholderTextColor="#ccc"
               mode="outlined"
               keyboardType="default"
               theme={{ colors: { background: "white" } }}

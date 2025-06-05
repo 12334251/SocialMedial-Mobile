@@ -107,6 +107,7 @@ export default function PasswordScreen() {
               onChangeText={setIsPassword}
               mode="outlined"
               secureTextEntry={!passwordVisible}
+              placeholderTextColor="#ccc"
               keyboardType="default"
               theme={{ colors: { background: "white" } }}
               outlineColor="#3b82f6"
@@ -126,6 +127,7 @@ export default function PasswordScreen() {
               onChangeText={onChangeConfirmPassword}
               mode="outlined"
               secureTextEntry={!confirmPasswordVisible}
+              placeholderTextColor="#ccc"
               keyboardType="default"
               theme={{ colors: { background: "white" } }}
               outlineColor="#3b82f6"

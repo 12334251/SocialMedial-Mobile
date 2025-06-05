@@ -30,11 +30,24 @@ export interface LoginValues {
 }
 
 export interface User {
-  id: number;
-  username: string;
+  _id: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  pictureUrl?: string;
-  // any other user properties returned by your API
+  picturePath: string;
+  friends: { [key: string]: string };
+  location: string;
+  occupation: string;
+  createdAt: string;
+  // …any other fields your backend sends…
+}
+
+interface loginResData {
+  success: boolean;
+  message: string;
+  user?: User;
+  token?: string;
+  loginTime?: string;
 }
 
 export interface ApiResponse<T> {
@@ -85,23 +98,17 @@ class AuthService extends BaseApiService {
    */
   public async loginUser(
     values: LoginValues
-  ): Promise<AxiosResponse<ApiResponse<User>>> {
+  ): Promise<AxiosResponse<loginResData>> {
     try {
-      // console.log(
-      //   "loginUser",
-      //   values,
-      //   process.env.EXPO_PUBLIC_BASE_API_DEFAULT_PATH
-      // );
-
       // POST the JSON data to your API endpoint.
-      const response: AxiosResponse<ApiResponse<User>> =
+      const response: AxiosResponse<loginResData> =
         await this.axiosInstance.post("/api/auth/login", values, {
           headers: {
             "Content-Type": "application/json",
           },
         });
 
-      // console.log("response.data", response.data, response.status);
+      console.log("response.data", response, response.data, response.status);
       return response;
     } catch (error: any) {
       console.log("Error during login:", error);

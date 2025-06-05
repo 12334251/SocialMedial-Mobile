@@ -94,6 +94,7 @@ export default function PostComposer({
               placeholder={`What's on your mind${
                 userName ? ", " + userName : ""
               }?`}
+              placeholderTextColor="#ccc"
             />
             {/* ... other content, previews, etc. ... */}
           </ScrollView>

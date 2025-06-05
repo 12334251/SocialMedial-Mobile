@@ -22,7 +22,7 @@ import * as SecureStore from "expo-secure-store";
 import { useAuth } from "@/Context/AuthContext";
 
 export default function LoginScreen() {
-  const { user, setUser } = useAuth();
+  const { setUser } = useAuth();
   const notificationContext = useNotification();
   const fcmToken = notificationContext?.fcmToken;
   const dispatch = useDispatch();
@@ -30,6 +30,7 @@ export default function LoginScreen() {
   const password = useRef("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   // console.log("notificationContext fcmToken", fcmToken);
@@ -71,24 +72,23 @@ export default function LoginScreen() {
       });
       const userResponse = loggedInResponse?.data;
       // console.log("handleLogIn", userResponse);
-      if (userResponse) {
-        // console.log("browserToken", userResponse?.user?.fcmToken);
-        // console.log(
-        //   "userResponse",
-        //   userResponse.user?._id,
-        //   userResponse.user?.token
-        // );
-        await SecureStore.setItemAsync("userId", userResponse.user?._id);
-        await SecureStore.setItemAsync("authToken", userResponse?.token);
-        console.log("login", userResponse);
-        setUser(userResponse.user);
-        dispatch(setLogin(userResponse.user));
+      if (userResponse?.success === true) {
+        await SecureStore.setItemAsync("userId", userResponse.user?._id ?? "");
+        await SecureStore.setItemAsync("authToken", userResponse?.token ?? "");
+        setUser(userResponse.user ?? null);
+        dispatch(setLogin(userResponse.user ?? null));
         router.replace("/(tabs)");
+      } else {
+        if (userResponse?.message === "Enter valid password") {
+          setPasswordError(userResponse?.message);
+        } else {
+          setEmailError(userResponse?.message);
+        }
       }
     } catch (error) {
       console.log("handleLogIn error:", error);
     } finally {
-      // setDisableButton(false);
+      setDisableButton(false);
     }
   };
 
@@ -125,6 +125,7 @@ export default function LoginScreen() {
                   setEmailError("Please enter a valid email address.");
                 }
               }}
+              placeholderTextColor="#ccc"
               autoCapitalize="none"
               mode="outlined"
               error={!!emailError}
@@ -144,6 +145,7 @@ export default function LoginScreen() {
               secureTextEntry={!passwordVisible}
               onChangeText={(text) => {
                 password.current = text;
+                if (passwordError) setPasswordError("");
               }}
               mode="outlined"
               right={
@@ -152,10 +154,17 @@ export default function LoginScreen() {
                   onPress={() => setPasswordVisible((v) => !v)}
                 />
               }
+              placeholderTextColor="#ccc"
               theme={{ colors: { background: "white" } }}
               outlineColor="#3b82f6"
               activeOutlineColor="#2563eb"
+              error={!!passwordError}
             />
+            {passwordError && (
+              <Text style={{ color: "red", marginTop: 4 }}>
+                {passwordError}
+              </Text>
+            )}
           </View>
 
           <View className="mt-12 w-full">

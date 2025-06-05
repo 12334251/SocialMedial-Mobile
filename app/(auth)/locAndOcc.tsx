@@ -65,6 +65,7 @@ export default function LocAndOccScreen() {
               onChangeText={onChangeLocation}
               mode="outlined"
               keyboardType="default"
+              placeholderTextColor="#ccc"
               theme={{ colors: { background: "white" } }}
               outlineColor="#3b82f6"
               activeOutlineColor="#2563eb"
@@ -77,6 +78,7 @@ export default function LocAndOccScreen() {
               onChangeText={onChangeOccupation}
               mode="outlined"
               keyboardType="default"
+              placeholderTextColor="#ccc"
               theme={{ colors: { background: "white" } }}
               outlineColor="#3b82f6"
               activeOutlineColor="#2563eb"

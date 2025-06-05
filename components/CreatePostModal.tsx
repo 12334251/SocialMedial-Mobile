@@ -306,6 +306,7 @@ export default function CreatePostModal({
               placeholder="What's on your mind?"
               className="px-4 pt-0 pb-4 text-lg text-black flex-1"
               style={{ textAlignVertical: "top" }}
+              placeholderTextColor="#ccc"
               multiline
               onChangeText={(t) => {
                 description.current = t;
