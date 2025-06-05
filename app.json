@@ -1,21 +1,41 @@
 {
   "expo": {
-    "name": "SocialMediaMobile",
+    "name": "SocialMedia",
     "slug": "SocialMediaMobile",
+    "owner": "mukshgupta082000",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mukshgupta082000.SocialMediaMobile",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        },
+        "UIBackgroundModes": ["remote-notification"],
+        "NSUserNotificationsUsageDescription": "Allow notifications to send alerts",
+        "NSAppleMusicUsageDescription": "Allow access to media library",
+        "NSPhotoLibraryUsageDescription": "Allow access to photos",
+        "NSMicrophoneUsageDescription": "Allow microphone access"
+      },
+      "icon": "./assets/icons/ios-icon.png"
     },
     "android": {
+      "edgeToEdgeEnabled": true,
+      "usesCleartextTraffic": true,
+      "permissions": [
+        "android.permission.NOTIFICATIONS",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/android-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mukshgupta082000.SocialMediaMobile"
     },
     "web": {
       "bundler": "metro",
@@ -23,19 +43,73 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "15.1"
+          }
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/icons/splash-icon-light.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-secure-store",
+        {
+          "configureAndroidBackup": true,
+          "faceIDPermission": "Allow SocialMediaMobile to access your Face ID biometric data."
+        }
+      ],
+      [
+        "react-native-edge-to-edge",
+        {
+          "android": {
+            "parentTheme": "Light",
+            "enforceNavigationBarContrast": false
+          }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/work-sans/WorkSans_200ExtraLight.ttf",
+            "node_modules/@expo-google-fonts/work-sans/WorkSans_300Light.ttf",
+            "node_modules/@expo-google-fonts/work-sans/WorkSans_400Regular.ttf",
+            "node_modules/@expo-google-fonts/work-sans/WorkSans_500Medium.ttf",
+            "node_modules/@expo-google-fonts/work-sans/WorkSans_600SemiBold.ttf",
+            "node_modules/@expo-google-fonts/work-sans/WorkSans_700Bold.ttf",
+            "node_modules/@expo-google-fonts/work-sans/WorkSans_800ExtraBold.ttf",
+            "node_modules/@expo-google-fonts/work-sans/WorkSans_900Black.ttf"
+          ]
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "apiUrl": "https://socialmedianestjs-production.up.railway.app",
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e576e3b7-3e13-4f31-b478-cfce10535793"
+      }
     }
   }
 }
